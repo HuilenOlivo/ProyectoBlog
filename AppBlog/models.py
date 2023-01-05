@@ -25,9 +25,12 @@ class Autor (models.Model):
 class Articulo (models.Model):
     id = models.AutoField(primary_key= True)
     titulo = models.CharField (max_length = 200, blank = False, null = False)
-    fecha_publicacion = models.DateField ('Fecha de publicacion', blank = False, null = False)
+    subtitulo = models.CharField (max_length = 200, blank = False, null = False)
+    cuerpo = models.TextField (blank = False, null = False, verbose_name = 'contenido')
     autor_id = models.OneToOneField (Autor, on_delete = models.CASCADE) #Si se borra el articulo, tambien al autor que se relaciona
-
+    fecha_publicacion = models.DateField ('Fecha de publicacion', blank = False, null = False)
+    #imagen= models.ImageField()    
+    
     class Meta:
         verbose_name = 'Articulo'
         verbose_name_plural = 'Articulos'
