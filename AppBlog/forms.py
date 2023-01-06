@@ -1,13 +1,18 @@
 from django import forms
-from .models import *
 
 
-class AutorForm(forms.ModelForm):
-    class Meta:
-        model = Autor
-        fields = ['nombre','apellido', 'edad', 'correo', 'ubicacion', 'descripcion'] #llenar todos los campos que tiene el modelo
 
-class ArticuloForm (forms.ModelForm):
-    class Meta:
-        model = Articulo
-        fields = ['titulo', 'subtitulo', 'cuerpo', 'autor', 'fecha_publicacion'] #'imagen']
+class AutorForm(forms.Form):
+    nombre = forms.CharField (max_length = 80, blank = False, null = False, label='Nombre Autor' )
+    apellido = forms.CharField (max_length = 80, blank = False, null = False, label='Apellido' )
+    edad= forms.IntegerField (null = True, blank = True, label='Edad')
+    correo = forms.EmailField (unique = True, max_length= 100, label='Correo')
+    ubicacion = forms.CharField (max_length = 200, blank = False, null = False, label='Ubicacion geografica')
+    descripcion = forms.TextField (blank = False, null = False, label='Descripcion')
+
+class ArticuloForm (forms.Form):
+    titulo = forms.CharField (max_length = 200, blank = False, null = False, label='Nombre Articulo')
+    subtitulo = forms.CharField (max_length = 200, blank = False, null = False, label='Subtitulo del Articulo')
+    cuerpo = forms.TextField (blank = False, null = False, verbose_name = 'Contenido del Articulo')
+    fecha_publicacion = forms.DateField ('Fecha de publicacion', blank = False, null = False, label='Fecha de Publicacion')
+    
