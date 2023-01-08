@@ -5,10 +5,17 @@ from .forms import *
 
 # Create your views here.
 def Inicio (request):
-    return render (request,'AppBlog/index.html')
+    return render (request,'AppBlog/inicio.html')
 
 def autores (request):
     return render (request, 'AppBlog/autores.html')
+
+def articulos (request):
+    return render (request, 'AppBlog/articulos.html')
+
+def crear_articulo (request):
+    return render (request, 'AppBlog/crear_articulo.html')
+
 
 def crearAutor (request):
     if request.method == 'POST':
@@ -34,4 +41,4 @@ def crearAutor (request):
         formulario = AutorForm()
         return render (request, 'AppBlog/crear_autor.html', {'form': formulario}) 
 
-          
+

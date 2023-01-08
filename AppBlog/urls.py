@@ -5,9 +5,11 @@ from .views import *
 
 urlpatterns = [
 
-    path ('', Inicio, name = 'index'),
+    path ('', Inicio, name = 'inicio'),
+    path ('autores/', autores, name = 'autores'),
     path ('crear_autor/', crearAutor, name = 'crear_autor'),
-    path ('autores/', autores, name = 'autores')
+    path ('articulos/', articulos, name='articulos'),
+    path ('crear_articulo/', crear_articulo, name= 'crear_articulo'),    
    
 
 
