@@ -39,75 +39,40 @@
                 </div>
             </div>
         </nav>
-        <!-- Header-->
-        <header class="masthead d-flex align-items-center">
-            <div class="container px-4 px-lg-5 text-center">
-                <h1 class="mb-1">Blog Huilen!</h1>
-                <h3 class="mb-5"><em>Ideal para encontrar y crear contenido</em></h3>
-                <a class="btn btn-primary btn-xl" href="{% url 'articulos' %}">Articulos</a>
-                <a class="btn btn-primary btn-xl" href="{% url 'autores' %}">Autores</a>
-            </div>
-        </header>
-        <!-- About-->
-        <section class="content-section bg-light" id="about">
-            <div class="container px-4 px-lg-5 text-center">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-10">
-                        <h2><em>Animate y crea tu USUARIO!</em></h2>
-                        <p class="lead mb-5">
-                            Se realiza de manera facil y rapida!
-                        </p>
-                        <a class="btn btn-dark btn-xl" href="{% url 'crear_articulo' %}">Crear Usuario!</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Services-->
-        <section class="content-section bg-primary text-white text-center" id="services">
-            <div class="container px-4 px-lg-5">
-                <div class="content-section-heading">
-                    <h3 class="text-secondary mb-0">Services</h3>
-                    <h2 class="mb-5">Dentro del blog podras realizar:</h2>
-                </div>
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-screen-smartphone"></i></span>
-                        <h4><strong>Lectura</strong></h4>
-                        <p class="text-faded mb-0">Leer los diferentes Articulos creados</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-pencil"></i></span>
-                        <h4><strong>Redaccion</strong></h4>
-                        <p class="text-faded mb-0">Crear tu propio Articulo</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-like"></i></span>
-                        <h4><strong>Interactuar</strong></h4>
-                        <p class="text-faded mb-0">
-                            Reaccionar a los Articulos
-                            <i class="fas fa-heart"></i>
-                        </p>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-mustache"></i></span>
-                        <h4><strong>Comentar</strong></h4>
-                        <p class="text-faded mb-0">Dejar comentarios </p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Callout-->
         <section class="callout">
             <div class="container px-4 px-lg-5 text-center">
                 <h2 class="mx-auto mb-5">
                   
-                    <em>Animate y crea tu </em>ARTICULO!
+                    <em>{% block titulo_url %}
+                        {% endblock %} </em>
                   
                 </h2>
-                <a class="btn btn-primary btn-xl" href="{% url 'crear_articulo' %}">Crear Articulo!</a>
             </div>
         </section>
+
+        <!-- About-->
+        <section class="content-section bg-light" id="about">
+            <div class="container px-4 px-lg-5 text-center">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-10">
+                        <h2><em>{% block titulo_articulox %}
+                            {% endblock %}</em></h2>
+                        <p class="lead mb-5">
+                            {% block subtitulo_articulox %}
+                            {% endblock %}
+                        </p>
+                        {% block boton_cambia %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
+
 
     
         <!-- Footer-->
@@ -135,3 +100,4 @@
         <script src="js/scripts.js"></script>
     </body>
 </html>
+
