@@ -8,6 +8,14 @@
 
     <em>Crear Autor!</em></h2>
 
+<h4><em>Completar formulario</em>
+
+
+    <form action="{% url 'crear_autor' %}" method="POST"> {% crsf_token %}
+
+        {{ form.as_table }}
+        
+    
+        <input type="submit" value="Crear Atriculo" class="btn btn-primary btn-xl">
+    </form></h4>
 {% endblock %} 
-
-
