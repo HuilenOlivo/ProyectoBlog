@@ -11,9 +11,13 @@
 <h4><em>Completar formulario</em>
 
 
-    <form action="{% url 'crear_autor' %}" method="POST"> {% crsf_token %}
+    <form action="{% url 'crear_autor' %}" method="POST"> {% csrf_token %}
+    
+        <table> 
+      
+            {{ form.as_table }}
 
-        {{ form.as_table }}
+        </table>
         
     
         <input type="submit" value="Crear Atriculo" class="btn btn-primary btn-xl">
