@@ -15,9 +15,9 @@ def articulos (request):
 
 def creararticulo (request):
     if request.method == 'POST':
-        formart=ArticuloForm (request.POST)
-        if formart.is_valid():
-            informacionart=formart.cleaned_data
+        form=ArticuloForm (request.POST)
+        if form.is_valid():
+            informacionart=form.cleaned_data
             titulo= informacionart['titulo']
             subtitulo= informacionart ['subtitulo']
             cuerpo= informacionart ['cuerpo']
@@ -30,7 +30,7 @@ def creararticulo (request):
         
 
         else:
-            return render (request, 'AppBlog/crear_articulo.html', {"formart": formart, "mensaje": "Informacion no valida"} )
+            return render (request, 'AppBlog/crear_articulo.html', {"form": form, "mensaje": "Informacion no valida"} )
 
     else:
         formularioart=ArticuloForm
