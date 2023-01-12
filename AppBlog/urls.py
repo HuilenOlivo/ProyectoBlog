@@ -9,7 +9,7 @@ urlpatterns = [
     path ('autores/', autores, name = 'autores'),
     path ('crear_autor/', crearautor, name = 'crear_autor'),
     path ('articulos/', articulos, name='articulos'),
-    path ('crear_articulo/', crear_articulo, name= 'crear_articulo'),    
+    path ('crear_articulo/', creararticulo, name= 'crear_articulo'),    
    
 
 
