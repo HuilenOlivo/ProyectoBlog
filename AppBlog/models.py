@@ -9,10 +9,6 @@ class CreadorBlog (models.Model):
     correo = models.EmailField (unique = True, max_length= 100, verbose_name = 'Correo')
     descripcion = models.TextField (blank = False, null = False, verbose_name = 'Descripcion')
 
-    class Meta:
-        verbose_name = 'Autor'
-        verbose_name_plural = 'Autores'
-        ordering = ['nombre']
 
     def __str__(self):
         return f'{self.nombre} - { self.apellido}'
@@ -29,31 +25,24 @@ class Autor (models.Model):
     #instagram = models.URLField ()
     #retrato = models.ImageField()
 
-    class Meta:
-        verbose_name = 'Autor'
-        verbose_name_plural = 'Autores'
-        ordering = ['nombre']
 
     def __str__(self):
         return f'{self.nombre} - { self.apellido}'
 
 
 class Articulo (models.Model):
-    id = models.AutoField(primary_key= True)
+    #id = models.AutoField(primary_key= True)
     titulo = models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'titulo')
     subtitulo = models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'subtitulo')
     cuerpo = models.TextField (blank = False, null = False, verbose_name = 'cuerpo')
-    autor_id = models.OneToOneField (Autor, on_delete = models.CASCADE,verbose_name = 'autor') #Si se borra el articulo, tambien al autor que se relaciona
+    autor = models.CharField (max_length=200, verbose_name = 'autor') #Si se borra el articulo, tambien al autor que se relaciona
     fecha_publicacion = models.DateField ('publicacion_articulo', blank = False, null = False)
-    #imagen= models.ImageField()    
+    imagen= models.ImageField(blank=True, upload_to= 'AppBlog/imagenes')    
     
-    class Meta:
-        verbose_name = 'Articulo'
-        verbose_name_plural = 'Articulos'
-        ordering = ['titulo']
 
     def __str__(self):
         return f'{self.titulo}'
-
-
-
+        
+        
+class usuario (models.Model):
+    nombre= models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'titulo')

@@ -60,3 +60,6 @@ def crearautor (request):
     else:
         formulario= AutorForm
         return render (request, 'AppBlog/crear_autor.html', {'form': formulario})
+
+def usuario (request):
+    return render (request,'AppBlog/crear_usuario.html')

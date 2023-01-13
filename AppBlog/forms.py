@@ -8,11 +8,11 @@ class AutorForm(forms.Form):
     edad= forms.IntegerField (label='Edad')
     correo = forms.EmailField (max_length= 100, label='Correo')
     ubicacion = forms.CharField (max_length = 200, label='Ubicacion geografica')
-    descripcion = forms.CharField (label='Descripcion')
+    descripcion = forms.CharField (label='Descripcion', widget=forms.Textarea)
 
 class ArticuloForm (forms.Form):
     titulo = forms.CharField (max_length = 200, label='Nombre Articulo')
     subtitulo = forms.CharField (max_length = 200, label='Subtitulo del Articulo')
-    cuerpo = forms.CharField (label = 'Contenido del Articulo')
+    cuerpo = forms.CharField (label = 'Contenido del Articulo', widget=forms.Textarea)
     fecha_publicacion = forms.DateField (label='Fecha de Publicacion')
-    
+    imagen = forms.ImageField(label="imagen", required=False)
