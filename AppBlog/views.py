@@ -14,16 +14,18 @@ def articulos (request):
     return render (request, 'AppBlog/articulos.html')
 
 def creararticulo (request):
-    if request.method == 'POST':
-        form=ArticuloForm (request.POST)
+    if request.method == "POST":
+        form=ArticuloForm (request.GET)
+
         if form.is_valid():
-            informacionart=form.cleaned_data
+            informacionart=form.cleaned_data    
             titulo= informacionart['titulo']
             subtitulo= informacionart ['subtitulo']
             cuerpo= informacionart ['cuerpo']
-            autor= informacionart ['autor']
-            publicacion= informacionart ['publicacion']
-            articulocreado= Articulo(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, publicacion=publicacion)
+            autorart= informacionart ['autorart']
+            fecha_publicacion = informacionart ['publicacion']
+            imagen=informacionart ['fecha_publicacion']
+            articulocreado= Articulo(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autorart, publicacion=fecha_publicacion, imagen=imagen)
             articulocreado.save()
             articulos=Articulo.objects.all()
             return render(request, "AppBlog/articulos.html", {"articulos": articulos, "mensaje": "Articulo Creado Correctamente"})
@@ -34,7 +36,7 @@ def creararticulo (request):
 
     else:
         formularioart=ArticuloForm
-        return render (request, 'AppBlog/crear_articulo.html', {'fromart': formularioart})
+        return render (request, 'AppBlog/crear_articulo.html', {'from': formularioart})
 
 
 

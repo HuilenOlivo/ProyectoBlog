@@ -14,5 +14,6 @@ class ArticuloForm (forms.Form):
     titulo = forms.CharField (max_length = 200, label='Nombre Articulo')
     subtitulo = forms.CharField (max_length = 200, label='Subtitulo del Articulo')
     cuerpo = forms.CharField (label = 'Contenido del Articulo', widget=forms.Textarea)
+    autorart = forms.CharField (max_length = 80, label='Nombre Autor' )
     fecha_publicacion = forms.DateField (label='Fecha de Publicacion')
     imagen = forms.ImageField(label="imagen", required=False)

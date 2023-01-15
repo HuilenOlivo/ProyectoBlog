@@ -31,12 +31,12 @@ class Autor (models.Model):
 
 
 class Articulo (models.Model):
-    #id = models.AutoField(primary_key= True)
-    titulo = models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'titulo')
-    subtitulo = models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'subtitulo')
-    cuerpo = models.TextField (blank = False, null = False, verbose_name = 'cuerpo')
-    autor = models.CharField (max_length=200, verbose_name = 'autor') #Si se borra el articulo, tambien al autor que se relaciona
-    fecha_publicacion = models.DateField ('publicacion_articulo', blank = False, null = False)
+    id = models.AutoField(primary_key= True)
+    titulo = models.CharField (max_length = 200, blank = True, null = False, verbose_name = 'titulo')
+    subtitulo = models.CharField (max_length = 200, blank = True, null = False, verbose_name = 'subtitulo')
+    cuerpo = models.TextField (blank = False, null = True, verbose_name = 'cuerpo')
+    autor = models.CharField (max_length=200, verbose_name = 'autor', null= True) #Si se borra el articulo, tambien al autor que se relaciona
+    fecha_entrega= models.DateField()
     imagen= models.ImageField(blank=True, upload_to= 'AppBlog/imagenes')    
     
 
@@ -45,4 +45,4 @@ class Articulo (models.Model):
         
         
 class usuario (models.Model):
-    nombre= models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'titulo')
+    nombre= models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'usuario')
