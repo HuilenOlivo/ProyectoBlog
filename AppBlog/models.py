@@ -22,8 +22,8 @@ class Autor (models.Model):
     correo = models.EmailField (unique = True, max_length= 100, verbose_name = 'Correo')
     ubicacion = models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'ubicacion')
     descripcion = models.TextField (blank = False, null = False, verbose_name = 'Descripcion')
-    #instagram = models.URLField ()
-    #retrato = models.ImageField()
+    #URL = models.URLField (blank=True, verbose_name = 'URL')
+    #retrato =  models.ImageField(blank=True, upload_to= 'AppBlog/imagenes')    
 
 
     def __str__(self):
@@ -36,7 +36,7 @@ class Articulo (models.Model):
     subtitulo = models.CharField (max_length = 200, blank = True, null = False, verbose_name = 'subtitulo')
     cuerpo = models.TextField (blank = False, null = True, verbose_name = 'cuerpo')
     autor = models.CharField (max_length=200, verbose_name = 'autor', null= True) #Si se borra el articulo, tambien al autor que se relaciona
-    fecha_entrega= models.DateField()
+    #fecha_entrega= models.DateField()
     imagen= models.ImageField(blank=True, upload_to= 'AppBlog/imagenes')    
     
 

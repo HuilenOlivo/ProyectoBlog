@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from .forms import *
-
+from django.http import HttpResponse
 
 # Create your views here.
 def Inicio (request):
@@ -13,9 +13,9 @@ def autores (request):
 def articulos (request):
     return render (request, 'AppBlog/articulos.html')
 
-def creararticulo (request):
+def crear_articulo (request):
     if request.method == "POST":
-        form=ArticuloForm (request.GET)
+        form=ArticuloForm (request.POST)
 
         if form.is_valid():
             informacionart=form.cleaned_data    
@@ -23,9 +23,9 @@ def creararticulo (request):
             subtitulo= informacionart ['subtitulo']
             cuerpo= informacionart ['cuerpo']
             autorart= informacionart ['autorart']
-            fecha_publicacion = informacionart ['publicacion']
-            imagen=informacionart ['fecha_publicacion']
-            articulocreado= Articulo(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autorart, publicacion=fecha_publicacion, imagen=imagen)
+            #fecha_publicacion = informacionart ['publicacion']
+            imagen=informacionart ['imagen']
+            articulocreado= Articulo(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autorart, imagen=imagen)
             articulocreado.save()
             articulos=Articulo.objects.all()
             return render(request, "AppBlog/articulos.html", {"articulos": articulos, "mensaje": "Articulo Creado Correctamente"})
@@ -51,7 +51,9 @@ def crearautor (request):
             correo=informacion['correo']
             ubicacion=informacion['ubicacion']
             descripcion= informacion ['descripcion']
-            autorcito= Autor (nombre=nombre, apellido=apellido, edad=edad, correo=correo, ubicacion=ubicacion, descripcion=descripcion)
+            #URL= informacion ['URL']
+            #retrato= informacion ['retrato']
+            autorcito= Autor (nombre=nombre, apellido=apellido, edad=edad, correo=correo, ubicacion=ubicacion, descripcion=descripcion, URL=URL, retrato=retrato)
             autorcito.save()
             autores= Autor.objects.all()
             return render (request, 'AppBlog/autores.html', {"autores": autores, "mensaje": "Autor Creado Correctamente"})
@@ -65,3 +67,4 @@ def crearautor (request):
 
 def usuario (request):
     return render (request,'AppBlog/crear_usuario.html')
+
