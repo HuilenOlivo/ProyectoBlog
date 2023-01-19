@@ -1,0 +1,28 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block titulo_url %}
+<h2 class="mx-auto mb-5">   
+    
+    <h1>{{ mensaje }}</h1>
+
+    <em>Resultados de la Busqueda:</em></h2>
+{% endblock %} 
+
+
+
+{% block titulo_articulox %}
+{% if Articulos %}
+
+<h2><em>{{ articulo.titulo }} - {{ articulo.subtitulo }} </em></h2>
+
+{% endblock %}
+
+
+   
+
+
+{% block boton_cambia %}
+<a class="btn btn-dark btn-xl" href="{% url 'crear_articulo' %}">Leer Articulo</a>
+{% endblock %}

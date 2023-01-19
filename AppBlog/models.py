@@ -3,11 +3,11 @@ from django.db import models
 # Create your models here.
 class CreadorBlog (models.Model):
     id = models.AutoField(primary_key= True)
-    nombre = models.CharField (max_length = 80, blank = False, null = False, verbose_name= 'Nombre')
-    apellido = models.CharField (max_length = 80, blank = False, null = False, verbose_name = 'Apellido' )
-    edad= models.IntegerField (null = True, blank = True, verbose_name = 'Edad')
-    correo = models.EmailField (unique = True, max_length= 100, verbose_name = 'Correo')
-    descripcion = models.TextField (blank = False, null = False, verbose_name = 'Descripcion')
+    nombrecreador = models.CharField (max_length = 80, blank = False, null = False, verbose_name= 'Nombre')
+    apellidocreador = models.CharField (max_length = 80, blank = False, null = False, verbose_name = 'Apellido' )
+    edadcreador= models.IntegerField (null = True, blank = True, verbose_name = 'Edad')
+    correocreador = models.EmailField (unique = True, max_length= 100, verbose_name = 'Correo')
+    descripcioncreador = models.TextField (blank = False, null = False, verbose_name = 'Descripcion')
 
 
     def __str__(self):

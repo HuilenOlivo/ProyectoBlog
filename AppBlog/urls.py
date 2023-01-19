@@ -11,7 +11,9 @@ urlpatterns = [
     path ('articulos/', articulos, name='articulos'),
     path ('crear_articulo/', crear_articulo, name= 'crear_articulo'),    
     path ('crear_usuario/', usuario, name= 'crear_usuario'),
-   
-
+    path ('busquedatitulo/', busquedatitulo, name= 'busquedatitulo'),
+    path ('buscar/', buscar, name= buscar),
+    #path ('leerautores/', leerautores, name=leerautores),
+    
 
 ]

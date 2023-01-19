@@ -13,7 +13,19 @@
 
 
 {% block titulo_articulox %}
-<h2><em>Autor nº 1 </em></h2>
+<h2><em>
+    
+<ul>
+
+    {% for autor in Autores %}
+    <li> {{ autor.nombre }} {{ autor.apellido }} </li>
+
+</ul>
+
+
+
+
+</em></h2>
 {% endblock %}
 
 
