@@ -76,8 +76,8 @@ def buscar(request):
     
     titulo= request.GET["titulo"]
     if titulo!="":
-        cursos= Articulo.objects.filter(titulo__icontains=titulo)
-        return render(request, "AppBlog/resultadosbusqueda.html", {"titulo": titulo})
+        titulos= Articulo.objects.filter(titulo__icontains=titulo)
+        return render(request, "AppBlog/resultadosbusqueda.html", {"titulo": titulos})
     else:
         return render(request, "AppBlog/busquedatitulo.html", {"mensaje": "Ingresar un Titulo para buscar"})
 
