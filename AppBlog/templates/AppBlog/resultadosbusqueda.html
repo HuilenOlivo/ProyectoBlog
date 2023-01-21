@@ -15,8 +15,13 @@
 {% block titulo_articulox %}
 {% if Articulos %}
 
+{% for articulo in articulos %}
+
 <h2><em>{{ articulo.titulo }} - {{ articulo.subtitulo }} </em></h2>
 
+{% endfor %}
+{% endif %}
+{% else %}
 {% endblock %}
 
 

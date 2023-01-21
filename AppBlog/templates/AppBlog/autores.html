@@ -12,13 +12,20 @@
 
 
 
-{% block titulo_articulox %}
+{% block titulo_autor %}
 <h2><em>
     
 <ul>
 
-    {% for autor in Autores %}
-    <li> {{ autor.nombre }} {{ autor.apellido }} </li>
+    {% for Autor in autores %}
+    <li> {{ Autor.nombre }} {{ Autor.apellido }} </li>
+    
+    <a class="btn btn-dark btn-xl" href="{% url 'eliminarautor' autor.id %}">Eliminar</a>
+    <a class="btn btn-dark btn-xl" href="{% url 'editarautor' autor.id %}">Editar</a>
+    <a class="btn btn-dark btn-xl" href="{% url 'autor_borrar' autor.id %}">Borrar</a>
+    {% endfor %}
+
+
 
 </ul>
 
@@ -28,13 +35,6 @@
 </em></h2>
 {% endblock %}
 
-
-   
-{% block subtitulo_articulox %}
-<p class="lead mb-5"> Descripcion </p> 
-{% endblock %}
-
-
 {% block boton_cambia %}
-<a class="btn btn-dark btn-xl" href="{% url 'crear_articulo' %}">Ampliar Informacion</a>
+<a class="btn btn-dark btn-xl" href="{% url 'crear_autor' %}">Crear Nuevo Autor</a>
 {% endblock %}

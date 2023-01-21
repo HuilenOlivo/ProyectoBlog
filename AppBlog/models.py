@@ -36,7 +36,7 @@ class Articulo (models.Model):
     subtitulo = models.CharField (max_length = 200, blank = True, null = False, verbose_name = 'subtitulo')
     cuerpo = models.TextField (blank = False, null = True, verbose_name = 'cuerpo')
     autor = models.CharField (max_length=200, verbose_name = 'autor', null= True) #Si se borra el articulo, tambien al autor que se relaciona
-    #fecha_entrega= models.DateField()
+    fecha_entrega= models.DateField()
     imagen= models.ImageField(blank=True, upload_to= 'AppBlog/imagenes')    
     
 

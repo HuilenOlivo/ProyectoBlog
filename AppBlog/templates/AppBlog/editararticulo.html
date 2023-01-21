@@ -1,0 +1,29 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block titulo_url %}
+
+<h2 class="mx-auto mb-5">     
+
+
+
+    <em>Editando articulo: {{ articulo }}</em></h2>
+
+    <h3>{{ mensaje }}</h3>
+
+    <form action="{% url 'editararticulo' %}" method="POST"> {% csrf_token %}
+    
+        <table> 
+      
+            {{ form.as_table }}
+
+        </table>
+        
+    
+        <input type="submit" value="Editar Atriculo" class="btn btn-primary btn-xl">
+    </form></h4>
+{% endblock %} 
+
+
+
