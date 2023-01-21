@@ -34,7 +34,7 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'articulos' %}">Articulos</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'autores' %}">Autores</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'crear_articulo' %}">Crear Articulo</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Usuario</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'ingresar' %}">Usuario</a></li>
                     </ul>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                         <p class="lead mb-5">
                             Se realiza de manera facil y rapida!
                         </p>
-                        <a class="btn btn-dark btn-xl" href="{% url 'crear_usuario' %}">Crear Usuario!</a>
+                        <a class="btn btn-dark btn-xl" href="{% url 'registro' %}">Crear Usuario!</a>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                     <em>Animate y crea tu </em>ARTICULO!
                   
                 </h2>
-                <a class="btn btn-primary btn-xl" href="{% url 'crear_articulo' %}">Crear Articulo!</a>
+                <a class="btn btn-primary btn-xl" href="{% url 'ingresar' %}">Crear Articulo!</a>
             </div>
         </section>
 

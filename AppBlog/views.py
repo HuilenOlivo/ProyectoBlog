@@ -7,6 +7,10 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.contrib.auth.forms import  UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -215,3 +219,40 @@ class articuloUpdate(LoginRequiredMixin,UpdateView):
 class articuloDelete(LoginRequiredMixin,DeleteView):#vista usada para ELIMINAR
     model= Articulo
     success_url = reverse_lazy('articulo_list')
+
+
+
+#------------------------- Registro Usuario---------------------------   
+def registro (request):
+    if request.method=="POST":
+        form= RegistroUsuarioForm(request.POST)
+        if form.is_valid():
+            username= form.cleaned_data.get("username")
+            form.save()
+            return render(request, "AppBlog/inicio.html", {"mensaje":f"Usuario {username} creado correctamente"})
+        else:
+            return render(request, "AppBlog/registro.html", {"form": form, "mensaje":"Error al crear el usuario"})
+    else:
+        form= RegistroUsuarioForm()
+        return render(request, "AppBlog/registro.html", {"form": form})
+
+
+#------------------------- Ingresar Usuario---------------------------  
+def ingresar_request(request):
+    if request.method=="POST":
+        form=AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            usu=info["username"]
+            clave=info["password"]
+            usuario=authenticate(username=usu, password=clave)#verifica si el usuario existe, si existe, lo devuelve, y si no devuelve None 
+            if usuario is not None:
+                login(request, usuario)
+                return render(request, "AppBlog/inicio.html", {"mensaje":f"Usuario {usu} logueado correctamente"})
+            else:
+                return render(request, "AppBlog/ingresar.html", {"form": form, "mensaje":"Usuario o contraseña incorrectos"})
+        else:
+            return render(request, "AppBlog/ingresar.html", {"form": form, "mensaje":"Usuario o contraseña incorrectos"})
+    else:
+        form=AuthenticationForm()
+        return render(request, "AppBlog/ingresar.html", {"form": form})
