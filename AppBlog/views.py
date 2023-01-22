@@ -50,7 +50,7 @@ def crear_articulo (request):
             articulocreado= Articulo(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autorart, imagen=imagen)
             articulocreado.save()
             articulos=Articulo.objects.all()
-            return render(request, "AppBlog/articulos.html", {"articulos": articulos, "mensaje": "Articulo Creado Correctamente"}, { "avatar": obtenerAvatar(request)})
+            return render(request, "AppBlog/articulos.html", {"articulos": articulos, "mensaje": "Articulo Creado Correctamente"})
         
 
         else:
@@ -73,12 +73,10 @@ def crearautor (request):
             correo=informacion['correo']
             ubicacion=informacion['ubicacion']
             descripcion= informacion ['descripcion']
-            URL= informacion ['URL']
-            retrato= informacion ['retrato']
-            autorcito= Autor (nombre=nombre, apellido=apellido, edad=edad, correo=correo, ubicacion=ubicacion, descripcion=descripcion, URL= URL, retrato=retrato)
+            autorcito= Autor (nombre=nombre, apellido=apellido, edad=edad, correo=correo, ubicacion=ubicacion, descripcion=descripcion)
             autorcito.save()
             autores= Autor.objects.all()
-            return render (request, 'AppBlog/autores.html', {"autores": autores, "mensaje": "Autor Creado Correctamente"}, { "avatar": obtenerAvatar(request)})
+            return render (request, 'AppBlog/autores.html', {"autores": autores, "mensaje": "Autor Creado Correctamente"})
         
         else:
             return render(request,'AppBlog/crear_autor.html', {"form": form, "mensaje": "Informacion no valida"})
@@ -206,7 +204,7 @@ class autorUpdate(LoginRequiredMixin,UpdateView):
     fields=['nombre', 'apellido','edad', 'email']
 
 
-class autorDelete(LoginRequiredMixin,DeleteView):#vista usada para ELIMINAR
+class autorDelete(LoginRequiredMixin,DeleteView):
     model= Autor
     success_url = reverse_lazy('autor_list')
 
@@ -229,7 +227,7 @@ class articuloUpdate(LoginRequiredMixin,UpdateView):
     fields=['nombre', 'apellido','edad', 'email']
 
 
-class articuloDelete(LoginRequiredMixin,DeleteView):#vista usada para ELIMINAR
+class articuloDelete(LoginRequiredMixin,DeleteView):
     model= Articulo
     success_url = reverse_lazy('articulo_list')
 

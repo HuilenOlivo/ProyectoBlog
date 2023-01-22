@@ -23,8 +23,8 @@ class Autor (models.Model):
     correo = models.EmailField (unique = True, max_length= 100, verbose_name = 'Correo')
     ubicacion = models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'ubicacion')
     descripcion = models.TextField (blank = False, null = False, verbose_name = 'Descripcion')
-    #URL = models.URLField (blank=True, verbose_name = 'URL')
-    #retrato =  models.ImageField(blank=True, upload_to= 'AppBlog/imagenes')    
+
+   
 
 
     def __str__(self):

@@ -20,9 +20,6 @@
 
 <h2><em>{{ articulo.titulo }} - {{ articulo.subtitulo }} </em></h2> </em></h2>
 
-<a class="btn btn-dark btn-xl" href="{% url 'eliminararticulo' articulo.id %}">Eliminar</a>
-<a class="btn btn-dark btn-xl" href="{% url 'editararticulo' articulo.id %}">Editar</a>
-<a class="btn btn-dark btn-xl" href="{% url 'articulo_borrar' articulo.id %}">Borrar</a>
 
 
 {% endfor %}
