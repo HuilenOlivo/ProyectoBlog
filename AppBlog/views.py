@@ -12,17 +12,25 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
 
+def obtenerAvatar(request):
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista)!=0:
+        avatar=lista[0].imagen.url
+    else:
+        avatar="/media/avatars/avatarpordefecto.png"
+    return avatar
+
 
 def Inicio (request):
     return render (request,'AppBlog/inicio.html')
 
 @login_required
 def autores (request):
-    return render (request, 'AppBlog/autores.html')
+    return render (request, 'AppBlog/autores.html', { "avatar": obtenerAvatar(request)})
 
 @login_required
 def articulos (request):
-    return render (request, 'AppBlog/articulos.html')
+    return render (request, 'AppBlog/articulos.html', { "avatar": obtenerAvatar(request)})
 
 
 #------------------------------ Crear Articulo ------------------------------------ 
@@ -42,11 +50,11 @@ def crear_articulo (request):
             articulocreado= Articulo(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autorart, imagen=imagen)
             articulocreado.save()
             articulos=Articulo.objects.all()
-            return render(request, "AppBlog/articulos.html", {"articulos": articulos, "mensaje": "Articulo Creado Correctamente"})
+            return render(request, "AppBlog/articulos.html", {"articulos": articulos, "mensaje": "Articulo Creado Correctamente"}, { "avatar": obtenerAvatar(request)})
         
 
         else:
-            return render (request, 'AppBlog/crear_articulo.html', {"form": form, "mensaje": "Informacion no valida"} )
+            return render (request, 'AppBlog/crear_articulo.html', {"form": form, "mensaje": "Informacion no valida"})
 
     else:
         formularioart=ArticuloForm()
@@ -70,10 +78,10 @@ def crearautor (request):
             autorcito= Autor (nombre=nombre, apellido=apellido, edad=edad, correo=correo, ubicacion=ubicacion, descripcion=descripcion, URL= URL, retrato=retrato)
             autorcito.save()
             autores= Autor.objects.all()
-            return render (request, 'AppBlog/autores.html', {"autores": autores, "mensaje": "Autor Creado Correctamente"})
+            return render (request, 'AppBlog/autores.html', {"autores": autores, "mensaje": "Autor Creado Correctamente"}, { "avatar": obtenerAvatar(request)})
         
         else:
-            return render(request,'AppBlog/crear_autor.html', {"form": form, "mensaje": "Informacion no valida"} )
+            return render(request,'AppBlog/crear_autor.html', {"form": form, "mensaje": "Informacion no valida"})
 
     else:
         formulario= AutorForm()
@@ -106,7 +114,7 @@ def busquedatitulo (request):
 @login_required
 def leerautores(request):
     autores=Autor.objects.all()
-    return render (request, 'AppBlog/Autores.html', {'autores': autores})
+    return render (request, 'AppBlog/Autores.html', {'autores': autores}, { "avatar": obtenerAvatar(request)})
 
 @login_required
 def eliminarautor (request, id):
@@ -114,7 +122,7 @@ def eliminarautor (request, id):
     print (autor)
     autor.delete()
     autores= Autor.objects.all ()
-    return render (request, 'AppBlog/autores.html', {'autores': autores, "mensaje": "Autor eliminado correctamente"})
+    return render (request, 'AppBlog/autores.html', {'autores': autores, "mensaje": "Autor eliminado correctamente"}, { "avatar": obtenerAvatar(request)})
 
 @login_required
 def editarautor (request,id):
@@ -261,3 +269,48 @@ def ingresar_request(request):
     else:
         form=AuthenticationForm()
         return render(request, "AppBlog/ingresar.html", {"form": form})
+
+
+#------------------------- Editar Perfil --------------------------- 
+@login_required 
+def editarperfil(request):
+    usuario=request.user
+
+    if request.method=="POST":
+        form=UserEditForm(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            usuario.first_name=info["first_name"]
+            usuario.last_name=info["last_name"]            
+            usuario.email=info["email"]
+            usuario.password1=info["password1"]
+            usuario.password2=info["password2"]
+
+            usuario.save()
+            return render(request, "AppBlog/inicio.html", {"mensaje":f"Usuario {usuario.username} editado correctamente"})
+        else:
+            return render(request, "AppBlog/editarperfil.html", {"form": form, "nombreusuario":usuario.username})
+    else:
+        form=UserEditForm(instance=usuario)
+        return render(request, "AppBlog/editarperfil.html", {"form": form, "nombreusuario":usuario.username})
+
+
+#------------------------- Crear Avatar ---------------------------  
+def agregaravatar(request):
+    if request.method=="POST":
+        form=AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            avatar=Avatar(user=request.user, imagen=request.FILES["imagen"])
+            avatarViejo=Avatar.objects.filter(user=request.user)
+            if len(avatarViejo)>0:
+                avatarViejo[0].delete()
+            avatar.save()
+            return render(request, "AppBlog/inicio.html", {"mensaje":f"Avatar agregado correctamente"})
+        else:
+            return render(request, "AppBlog/agregarAvatar.html", {"form": form, "usuario": request.user, "mensaje":"Error al agregar el avatar"})
+    else:
+        form=AvatarForm()
+        return render(request, "AppBlog/agregarAvatar.html", {"form": form, "usuario": request.user})
+
+
+

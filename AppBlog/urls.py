@@ -33,9 +33,13 @@ urlpatterns = [
     path ('articulo/list/', articuloList.as_view(), name='articulo_list'),
     path ('articulo/borrar/<pk>', articuloDelete.as_view(), name= 'articulo_borrar'),
 
-
+#------------------- Registrar/ Ingresar / Salir Usuario --------------------    
     path ('registro/', registro, name= 'registro'),
     path ('ingresar/', ingresar_request, name='ingresar'),
     path ('logout/', LogoutView.as_view(), name='logout'),
+
+#------------------- Editar perfil / Crear Avatar --------------------    
+    path('editarperfil/', editarperfil, name='editarperfil'),
+    path('agregarAvatar/', agregaravatar, name='agregarAvatar'),
 
 ]

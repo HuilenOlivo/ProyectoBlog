@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class CreadorBlog (models.Model):
@@ -36,7 +37,7 @@ class Articulo (models.Model):
     subtitulo = models.CharField (max_length = 200, blank = True, null = False, verbose_name = 'subtitulo')
     cuerpo = models.TextField (blank = False, null = True, verbose_name = 'cuerpo')
     autor = models.CharField (max_length=200, verbose_name = 'autor', null= True) #Si se borra el articulo, tambien al autor que se relaciona
-    fecha_entrega= models.DateField()
+    fecha_entrega= models.DateTimeField (verbose_name = 'fecha_entrega', blank=True, null=True)
     imagen= models.ImageField(blank=True, upload_to= 'AppBlog/imagenes')    
     
 
@@ -46,3 +47,7 @@ class Articulo (models.Model):
         
 class usuario (models.Model):
     nombre= models.CharField (max_length = 200, blank = False, null = False, verbose_name = 'usuario')
+
+class Avatar(models.Model):
+    imagen= models.ImageField(upload_to="avatars")
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
