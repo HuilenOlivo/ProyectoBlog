@@ -13,19 +13,20 @@ from django.contrib.auth.decorators import login_required
 
 
 
-# Create your views here.
 def Inicio (request):
     return render (request,'AppBlog/inicio.html')
 
+@login_required
 def autores (request):
     return render (request, 'AppBlog/autores.html')
 
+@login_required
 def articulos (request):
     return render (request, 'AppBlog/articulos.html')
 
 
 #------------------------------ Crear Articulo ------------------------------------ 
-
+@login_required
 def crear_articulo (request):
     if request.method == "POST":
         form=ArticuloForm (request.POST)
@@ -52,7 +53,7 @@ def crear_articulo (request):
         return render (request, 'AppBlog/crear_articulo.html', {'form': formularioart})
 
 #--------------------------------- Crear Autor ----------------------------------------------------
-
+@login_required
 def crearautor (request):
     if request.method=='POST':
         form= AutorForm (request.POST)
@@ -83,7 +84,7 @@ def usuario (request):
 
 #-----------------------------------Busqueda titulo------------------------------------------------------------------------------
 
-
+@login_required
 def busquedatitulo (request):
     return render (request, 'AppBlog/busquedatitulo.html')
 
@@ -102,11 +103,12 @@ def busquedatitulo (request):
 
 #---------------------------leer / eliminar / editar autor--------------------------------------------------------------
 
-
+@login_required
 def leerautores(request):
     autores=Autor.objects.all()
     return render (request, 'AppBlog/Autores.html', {'autores': autores})
 
+@login_required
 def eliminarautor (request, id):
     autor= Autor.objects.get(id=id)
     print (autor)
@@ -114,6 +116,7 @@ def eliminarautor (request, id):
     autores= Autor.objects.all ()
     return render (request, 'AppBlog/autores.html', {'autores': autores, "mensaje": "Autor eliminado correctamente"})
 
+@login_required
 def editarautor (request,id):
     autor=Autor.objects.get(id=id)
     if request.method=="POST":
@@ -141,11 +144,12 @@ def editarautor (request,id):
 
 #-------------------------------leer / eliminar / editar  articulo---------------------------------------------------------------------------------
 
-
+@login_required
 def leerarticulos(request):
     articulos=Articulo.objects.all()
     return render (request, 'AppBlog/Articulos.html', {'articulos': articulos})
 
+@login_required
 def eliminarticulo(request, id):
     articulo= Articulo.objects.get(id=id)
     print (articulo)
@@ -153,6 +157,7 @@ def eliminarticulo(request, id):
     articulos= Articulo.objects.all ()
     return render (request, 'AppBlog/articulos.html', {'articulos': articulos, "mensaje": "Articulo eliminado correctamente"})
 
+@login_required
 def editararticulo (request,id):
     articulo=Articulo.objects.get(id=id)
     if request.method=="POST":
